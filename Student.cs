@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Threading;
 
 namespace Assignment2
 {
@@ -45,6 +47,8 @@ namespace Assignment2
 
         public override string ToString()
         {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-FR");
+
             string toString = String.Format("{0}: {1} {2}. Started on {3} and ", id, GivenName, SurName, StartDate.ToShortDateString());
             
             if (this.Status == Status.Graduated)
