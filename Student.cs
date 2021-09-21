@@ -1,44 +1,70 @@
 ﻿using System;
+using System.Globalization;
+using System.Threading;
 
 namespace Assignment2
 {
     public class Student
     {
         public int id { get; }
-        string GivenName;
-        string SurName;
-        public readonly Status Status;
-        DateTime StartDate;
-        DateTime EndDate;
-        DateTime GraduationDate;
+        public string GivenName;
+        public string SurName;
+        public DateTime StartDate;
+        public DateTime EndDate;
+        public DateTime GraduationDate;
+        public Status Status
+        {
+            get
+            {
+                if (!EndDate.Equals(GraduationDate))
+                {
+                    return Status.Dropout;
+                }
+                else if (DateTime.Now.CompareTo(GraduationDate) > 0)
+                {
+                    return Status.Graduated;
+                }
+                else if (DateTime.Now.CompareTo(StartDate.AddDays((double) 365 / 2)) < 0)
+                {
+                    return Status.New;
+                }
+                else
+                {
+                    return Status.Active;
+                }
+            }
+        }
 
         public Student(int id, string GivenName, string SurName, DateTime StartDate, DateTime EndDate, DateTime GraduationDate) 
         {
-            this.id = id; 
+            this.id = id;
             this.GivenName = GivenName;
             this.SurName = SurName;
             this.StartDate = StartDate;
             this.EndDate = EndDate;
             this.GraduationDate = GraduationDate;
-
-            if (DateTime.MinValue.CompareTo(EndDate) == 0 && DateTime.MinValue.CompareTo(EndDate) == 0) 
-            {
-                //check if new or active
-            }
-
-            if (DateTime.Now.CompareTo(GraduationDate) > 0) 
-            {
-                Status = Status.Graduated;
-            } else if (DateTime.Now.CompareTo(EndDate) > 0 && DateTime.MinValue.CompareTo(EndDate) != 0) 
-            {
-
-            }
-
         }
 
         public override string ToString()
         {
-            return "";
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-FR");
+
+            string toString = String.Format("{0}: {1} {2}. Started on {3} and ", id, GivenName, SurName, StartDate.ToShortDateString());
+            
+            if (this.Status == Status.Graduated)
+            {
+                toString += "graduated on " + GraduationDate.ToShortDateString();
+            }
+            else if (this.Status == Status.Dropout)
+            {
+                toString += "dropped out on " + EndDate.ToShortDateString();
+            }
+            else
+            {
+                toString += "will graduate on " + GraduationDate.ToShortDateString();
+            }
+
+            return toString + ".";
         }
 
     }
