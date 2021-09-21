@@ -25,6 +25,7 @@ namespace Assignment2
             DateTime gradDate = new DateTime(yearGrad, monthGrad, dayGrad);
 
             Student student = new Student(id, firstname, surname, startDate, endDate, gradDate);
+
             Assert.Equal(printOut, student.ToString());
         }
 
@@ -40,7 +41,7 @@ namespace Assignment2
             DateTime gradDate = new DateTime(yearEnd, monthEnd, dayEnd);
 
             Student student = new Student(42, "John", "Doe", startDate, endDate, gradDate);
-            
+
             Assert.Equal(Status.Active, student.Status);
         }
 
@@ -51,7 +52,7 @@ namespace Assignment2
         [InlineData(2018, 01, 01, 2021, 06, 01, 2021, 07, 01)]
         [InlineData(2020, 12, 24, 2021, 10, 01, 2023, 01, 01)]
         public void Student_has_dropped_out(int yearStart, int monthStart, int dayStart, 
-                                          int yearEnd, int monthEnd, int dayEnd,  
+                                          int yearEnd, int monthEnd, int dayEnd,
                                           int yearGrad, int monthGrad, int dayGrad) 
         {
             DateTime startTime = new DateTime(yearStart, monthStart, dayStart);
