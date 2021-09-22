@@ -16,15 +16,15 @@ namespace Assignment2
         {
             get
             {
-                if (!EndDate.Equals(GraduationDate))
+                if (EndDate != GraduationDate)
                 {
                     return Status.Dropout;
                 }
-                else if (DateTime.Now.CompareTo(GraduationDate) > 0)
+                else if (DateTime.Now > GraduationDate)
                 {
                     return Status.Graduated;
                 }
-                else if (DateTime.Now.CompareTo(StartDate.AddDays((double) 365 / 2)) < 0)
+                else if (DateTime.Now < StartDate.AddDays((double) 365 / 2))
                 {
                     return Status.New;
                 }
