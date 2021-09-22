@@ -46,10 +46,9 @@ namespace Assignment2
             DateTime gradDate = new DateTime(2022, 06, 15);
             
             ImmutableStudent alice = new ImmutableStudent(1, "John", "Doe", startDate, endDate, gradDate);
-            string expected = "ImmutableStudent { id = 1, GivenName = John, SurName = Doe, StartDate = 30/08/2019 00.00.00, " +
-                              "EndDate = 15/06/2022 00.00.00, GraduationDate = 15/06/2022 00.00.00, Status = Active }";
+            ImmutableStudent bob = new ImmutableStudent(1, "John", "Doe", startDate, endDate, gradDate);
             
-            Assert.Equal(expected, alice.ToString());
+            Assert.True(bob.ToString() == alice.ToString());
         }
 
         [Theory]
