@@ -5,6 +5,19 @@ namespace Assignment2
 {
     public class StudentTest
     {
+        [Fact]
+        public void Start_date_is_not_changed() 
+        {
+            DateTime startDate = new DateTime(2021,08, 29);
+            DateTime endDate = new DateTime(2024, 06, 25);
+            DateTime gradDate = new DateTime(2024, 06, 25);
+
+            Student student = new Student(42, "John", "Doe", startDate, endDate, gradDate);
+            
+            Assert.Equal(Status.New, student.Status);
+            Assert.Equal(Status.New, student.Status);
+        }
+
         [Theory]
         [InlineData(1, "Ole", "Moeller", 2019, 02, 02, 2022, 05, 10, 2022, 05, 10, 
                     "1: Ole Moeller. Started on 02/02/2019 and will graduate on 10/05/2022.")]
@@ -14,7 +27,7 @@ namespace Assignment2
                     "3: Faisal Hassan. Started on 16/08/2021 and will graduate on 15/07/2025.")]
         [InlineData(4, "Tamana", "Hansen", 2018, 08, 16, 2021, 07, 15, 2021, 07, 15, 
                     "4: Tamana Hansen. Started on 16/08/2018 and graduated on 15/07/2021.")]
-        public void student_information_can_be_made_toString(int id, string firstname, string surname,
+        public void Student_information_can_be_made_toString(int id, string firstname, string surname,
                                                              int yearStart, int monthStart, int dayStart, 
                                                              int yearEnd, int monthEnd, int dayEnd,
                                                              int yearGrad, int monthGrad, int dayGrad,
